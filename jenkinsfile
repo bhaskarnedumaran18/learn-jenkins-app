@@ -26,6 +26,28 @@ pipeline {
             }
         }
     }
+
+    stage('E2E') {
+         
+            steps {
+                sh '''
+                   npm install -g serve
+                   serve -s build 
+                   npx playwright test
+                '''
+            }
+        }
+
+        stage('Test') {
+          
+            steps {
+                sh '''
+                    test -f build/index.html
+                    npm test
+                '''
+            }
+        }
+    }
     post {
         always {
             junit 'test-results/junit.xml'
