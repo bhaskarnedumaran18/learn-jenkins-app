@@ -3,9 +3,7 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent {
-                
-            }
+         
             steps {
                 sh '''
                     ls -la
@@ -19,10 +17,7 @@ pipeline {
         }
 
         stage('Test') {
-            agent {
-                
-            }
-
+          
             steps {
                 sh '''
                     test -f build/index.html
