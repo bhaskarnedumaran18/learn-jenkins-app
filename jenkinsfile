@@ -4,9 +4,7 @@ pipeline {
     stages {
 
         stage('Build') {
-            agent {
-               
-            }
+           
             steps {
                 sh '''
                     ls -la
@@ -22,9 +20,7 @@ pipeline {
         stage('Tests') {
             parallel {
                 stage('Unit tests') {
-                    agent {
-                        
-                    }
+                    
 
                     steps {
                         sh '''
@@ -40,9 +36,7 @@ pipeline {
                 }
 
                 stage('E2E') {
-                    agent {
-                        
-                    }
+                    
 
                     steps {
                         sh '''
@@ -63,9 +57,7 @@ pipeline {
         }
 
         stage('Deploy') {
-            agent {
-                
-            }
+            
             steps {
                 sh '''
                     npm install netlify-cli
