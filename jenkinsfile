@@ -2,14 +2,10 @@ pipeline {
     agent any
 
     stages {
-        /*
 
         stage('Build') {
             agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
+               
             }
             steps {
                 sh '''
@@ -22,12 +18,14 @@ pipeline {
                 '''
             }
         }
-        */
 
         stage('Tests') {
             parallel {
                 stage('Unit tests') {
-                    
+                    agent {
+                        
+                    }
+
                     steps {
                         sh '''
                             #test -f build/index.html
@@ -42,7 +40,9 @@ pipeline {
                 }
 
                 stage('E2E') {
-                    
+                    agent {
+                        
+                    }
 
                     steps {
                         sh '''
@@ -59,6 +59,18 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+
+        stage('Deploy') {
+            agent {
+                
+            }
+            steps {
+                sh '''
+                    npm install netlify-cli
+                    node_modules/.bin/netlify --version
+                '''
             }
         }
     }
