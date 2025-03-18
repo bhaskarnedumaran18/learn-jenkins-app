@@ -32,7 +32,7 @@ pipeline {
 
                     steps {
                         sh '''
-                            #test -f build/index.html
+                            test -f build/index.html
                             npm test
                         '''
                     }
@@ -45,7 +45,6 @@ pipeline {
 
                 stage('E2E') {
                     
-
                     steps {
                         sh '''
                             npm install serve
@@ -60,6 +59,13 @@ pipeline {
                             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright Local', reportTitles: '', useWrapperFileDirectly: true])
                         }
                     }
+                    
+
+                    
+                }
+                    
+
+                    
                 }
             }
         }
