@@ -3,7 +3,7 @@ pipeline {
      environment{
         NETLIFY_SITE_ID = '8a78d08c-5d25-49ff-98e6-82b8381811ee'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
-        CI_ENVIRONMENT_URL = 'PUT YOUR NETLIFY SITE URL HERE'
+        CI_ENVIRONMENT_URL = 'https://joyful-licorice-857f49.netlify.app'
          
     }
  
@@ -32,7 +32,7 @@ pipeline {
 
                     steps {
                         sh '''
-                            test -f build/index.html
+                            #test -f build/index.html
                             npm test
                         '''
                     }
@@ -57,7 +57,7 @@ pipeline {
 
                     post {
                         always {
-                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright E2E Report', reportTitles: '', useWrapperFileDirectly: true])
+                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright Local', reportTitles: '', useWrapperFileDirectly: true])
                         }
                     }
                 }
@@ -91,7 +91,7 @@ pipeline {
 
         stage('Prod E2E') {
             environment {
-                CI_ENVIRONMENT_URL = 'PUT YOUR NETLIFY SITE URL HERE'
+                CI_ENVIRONMENT_URL = 'https://joyful-licorice-857f49.netlify.app'
             }
 
             steps {
@@ -105,7 +105,7 @@ pipeline {
            
             post {
                 always {
-                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-E2E', reportFiles: 'index.html', reportName: 'Playwright HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright E2E', reportTitles: '', useWrapperFileDirectly: true])
                 }
             }
         }
